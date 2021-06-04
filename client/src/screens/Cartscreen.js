@@ -17,10 +17,8 @@ export default function Cartscreen() {
   const { success } = orderstate;
 
   if (success) {
-    setTimeout(() => {
-      localStorage.removeItem("cartItems");
-      return <Redirect to="/orders" />;
-    }, 3000);
+    localStorage.removeItem("cartItems");
+    return <Redirect to="/orders" />;
   }
   return (
     <div>
