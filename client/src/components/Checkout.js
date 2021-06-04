@@ -5,7 +5,6 @@ import { placeOrder } from "../actions/orderActions";
 import Error from "../components/Error";
 import Loading from "../components/Loading";
 import Success from "../components/Success";
-import { Redirect } from "react-router-dom";
 export default function Checkout({ subtotal }) {
   const orderstate = useSelector((state) => state.placeOrderReducer);
   const userstate = useSelector((state) => state.loginUserReducer);
@@ -22,9 +21,7 @@ export default function Checkout({ subtotal }) {
       {loading && <Loading />}
       {error && <Error error="Something went wrong" />}
       {success && <Success success="Your Order Placed Successfully" />}
-      {success && localStorage.removeItem("cartItems") && (
-        <Redirect to="/orders" />
-      )}
+
       {currentUser ? (
         <StripeCheckout
           amount={subtotal * 100}
