@@ -50,7 +50,7 @@ export default function Registerscreen() {
             />
             <input
               required
-              type="text"
+              type="email"
               placeholder="email"
               className="form-control"
               value={email}
