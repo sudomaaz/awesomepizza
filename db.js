@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 
-var mongoURL =
-  "mongodb+srv://maaz:Jo32wnEz1qfzHg2x@cluster0.jbt1g.mongodb.net/mern-pizza";
 
-mongoose.connect(mongoURL, { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect(process.env.DB_URI, { useUnifiedTopology: true, useNewUrlParser: true });
 
 var db = mongoose.connection;
 
