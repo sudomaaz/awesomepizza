@@ -18,7 +18,6 @@ export default function Checkout({ subtotal }) {
   if (success) {
     console.log("hello");
     setTimeout(() => {
-      localStorage.removetItem("cartItems");
       <Redirect to="/orders" />;
     }, 5000);
   }
