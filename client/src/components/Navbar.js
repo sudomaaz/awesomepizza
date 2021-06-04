@@ -45,6 +45,13 @@ export default function Navbar() {
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton"
                 >
+                  {isAdmin ? (
+                    <li className="nav-item">
+                      <a className="nav-link" href="/admin">
+                        Dashboard
+                      </a>
+                    </li>
+                  ) : null}
                   <a className="dropdown-item" href="/orders">
                     Orders
                   </a>
@@ -60,21 +67,11 @@ export default function Navbar() {
                 </div>
               </div>
             ) : (
-              <>
-                {isAdmin ? (
-                  <li className="nav-item">
-                    <a className="nav-link" href="/admin">
-                      Login
-                    </a>
-                  </li>
-                ) : null}
-
-                <li className="nav-item">
-                  <a className="nav-link" href="/login">
-                    Login
-                  </a>
-                </li>
-              </>
+              <li className="nav-item">
+                <a className="nav-link" href="/login">
+                  Login
+                </a>
+              </li>
             )}
 
             <li className="nav-item">
