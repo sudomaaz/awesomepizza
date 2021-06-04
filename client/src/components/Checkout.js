@@ -5,6 +5,7 @@ import { placeOrder } from "../actions/orderActions";
 import Error from "../components/Error";
 import Loading from "../components/Loading";
 import Success from "../components/Success";
+import { Redirect } from "react-router-dom";
 export default function Checkout({ subtotal }) {
   const orderstate = useSelector((state) => state.placeOrderReducer);
   const { loading, error, success } = orderstate;
@@ -12,6 +13,12 @@ export default function Checkout({ subtotal }) {
   function tokenHander(token) {
     console.log(token);
     dispatch(placeOrder(token, subtotal));
+  }
+
+  if (success) {
+    setTimeout(() => {
+      return <Redirect to="/orders" />;
+    }, 3000);
   }
 
   return (
