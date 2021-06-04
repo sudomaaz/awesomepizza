@@ -47,7 +47,7 @@ export default function Navbar() {
                 >
                   {isAdmin ? (
                     <li className="nav-item">
-                      <a className="nav-link" href="/admin">
+                      <a className="dropdown-item" href="/admin">
                         Dashboard
                       </a>
                     </li>
