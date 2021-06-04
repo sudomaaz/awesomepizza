@@ -5,6 +5,7 @@ export default function Navbar() {
   const cartstate = useSelector((state) => state.cartReducer);
   const userstate = useSelector((state) => state.loginUserReducer);
   const { currentUser } = userstate;
+  const isAdmin = currentUser.isAdmin;
   const dispatch = useDispatch();
   return (
     <div>
@@ -59,11 +60,21 @@ export default function Navbar() {
                 </div>
               </div>
             ) : (
-              <li className="nav-item">
-                <a className="nav-link" href="/login">
-                  Login
-                </a>
-              </li>
+              <>
+                {isAdmin ? (
+                  <li className="nav-item">
+                    <a className="nav-link" href="/login">
+                      Login
+                    </a>
+                  </li>
+                ) : null}
+
+                <li className="nav-item">
+                  <a className="nav-link" href="/login">
+                    Login
+                  </a>
+                </li>
+              </>
             )}
 
             <li className="nav-item">
