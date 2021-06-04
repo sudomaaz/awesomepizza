@@ -8,6 +8,8 @@ import Success from "../components/Success";
 import { Redirect } from "react-router-dom";
 export default function Checkout({ subtotal }) {
   const orderstate = useSelector((state) => state.placeOrderReducer);
+  const userstate = useSelector((state) => state.loginUserReducer);
+  const { currentUser } = userstate;
   const { loading, error, success } = orderstate;
   const dispatch = useDispatch();
   function tokenHander(token) {
@@ -15,29 +17,27 @@ export default function Checkout({ subtotal }) {
     dispatch(placeOrder(token, subtotal));
   }
 
-  if (success) {
-    console.log("hello");
-    setTimeout(() => {
-      localStorage.removeItem("cartItems");
-      <Redirect to="/orders" />;
-    }, 5000);
-  }
-
   return (
     <div>
       {loading && <Loading />}
       {error && <Error error="Something went wrong" />}
       {success && <Success success="Your Order Placed Successfully" />}
-
-      <StripeCheckout
-        amount={subtotal * 100}
-        shippingAddress
-        token={tokenHander}
-        stripeKey="pk_test_51IxVZhSBzvuryKkMsc5QPEJOCk0ChVCfONzBYQjFJaetFILS8ZavFCaP37kVUBNHZdsOcRQ7RTgiVe7D2qeVZBOj00BZBsRzN9"
-        currency="INR"
-      >
-        <button className="btn">Pay Now</button>
-      </StripeCheckout>
+      {success && localStorage.removeItem("cartItems") && (
+        <Redirect to="/orders" />
+      )}
+      {currentUser ? (
+        <StripeCheckout
+          amount={subtotal * 100}
+          shippingAddress
+          token={tokenHander}
+          stripeKey="pk_test_51IxVZhSBzvuryKkMsc5QPEJOCk0ChVCfONzBYQjFJaetFILS8ZavFCaP37kVUBNHZdsOcRQ7RTgiVe7D2qeVZBOj00BZBsRzN9"
+          currency="INR"
+        >
+          <button className="btn">Pay Now</button>
+        </StripeCheckout>
+      ) : (
+        <button className="btn">Login to Pay</button>
+      )}
     </div>
   );
 }
