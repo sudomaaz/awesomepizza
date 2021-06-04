@@ -44,3 +44,8 @@
 <p>Username: admin@xyz.com<p>
 <p>Password: admin321</p>
 <hr>
+<h3>Demo card</h3>
+<p>Card Number: 4242 4242 4242 4242</p>
+<p>Expiry: 10/24</p>
+<p>CVV: 212</p>
+<hr>
