@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../actions/cartActions";
 import { deleteFromCart } from "../actions/cartActions";
@@ -8,6 +8,7 @@ import "aos/dist/aos.css";
 import { Redirect } from "react-router-dom";
 export default function Cartscreen() {
   AOS.init();
+  const [redirect, setRedirect] = useState(false);
   const cartstate = useSelector((state) => state.cartReducer);
   const cartItems = cartstate.cartItems;
   var subtotal = cartItems.reduce((x, item) => x + item.price, 0);
@@ -18,6 +19,14 @@ export default function Cartscreen() {
 
   if (success) {
     localStorage.removeItem("cartItems");
+    cartItems.map((item) => {
+      dispatch(deleteFromCart(item));
+    });
+    setTimeout(() => {
+      setRedirect(true);
+    }, 2000);
+  }
+  if (redirect) {
     return <Redirect to="/orders" />;
   }
   return (
