@@ -63,7 +63,7 @@ export default function Navbar() {
               <>
                 {isAdmin ? (
                   <li className="nav-item">
-                    <a className="nav-link" href="/login">
+                    <a className="nav-link" href="/admin">
                       Login
                     </a>
                   </li>
